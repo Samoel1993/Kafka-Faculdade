@@ -18,15 +18,18 @@ public class Producer {
         try(KafkaProducer<String, String > producer = new KafkaProducer<>(props)){
             Scanner sc = new Scanner(System.in);
 
-            System.out.println("Digite pedidos (para sair digite 'sair')");
+            //System.out.println("Digite pedidos (para sair digite 'sair')");
 
             while (true){
-                String pedido = sc.nextLine();
-                if(pedido.equalsIgnoreCase("sair")) break;
+                //String pedido = sc.nextLine();
+               // if(pedido.equalsIgnoreCase("sair")) break;
 
-                ProducerRecord<String, String> record = new ProducerRecord<>("pedidos", pedido);
-                producer.send(record);
-                System.out.println("Pedido enviado: "+ pedido);
+
+                for (int i = 0; i < 1000; i++) {
+                    ProducerRecord<String, String> record = new ProducerRecord<>("pedidos", String.valueOf(i));
+                    producer.send(record);
+                    System.out.println("Pedido enviado: "+ i);
+                }
             }
         }
     }
